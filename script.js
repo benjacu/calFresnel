@@ -78,6 +78,44 @@ function limpiar() {
   if (existingChart) existingChart.destroy();
 }
 
+// Sliders sincronizados
+const sliderD = document.getElementById("sliderDistancia");
+const sliderF = document.getElementById("sliderFrecuencia");
+const inputD = document.getElementById("distancia");
+const inputF = document.getElementById("frecuencia");
+const labelD = document.getElementById("labelDistancia");
+const labelF = document.getElementById("labelFrecuencia");
+
+sliderD.addEventListener("input", () => {
+  inputD.value = sliderD.value;
+  labelD.textContent = sliderD.value;
+  calcular();
+});
+
+sliderF.addEventListener("input", () => {
+  inputF.value = sliderF.value;
+  labelF.textContent = sliderF.value;
+  calcular();
+});
+
+inputD.addEventListener("input", () => {
+  let val = parseFloat(inputD.value.replace(",", "."));
+  if (!isNaN(val)) {
+    sliderD.value = val;
+    labelD.textContent = val;
+  }
+});
+
+inputF.addEventListener("input", () => {
+  let val = parseFloat(inputF.value.replace(",", "."));
+  if (!isNaN(val)) {
+    sliderF.value = val;
+    labelF.textContent = val;
+  }
+});
+
+
+
 // Modo claro/oscuro
 document.getElementById("toggleTema").addEventListener("change", function () {
   const body = document.body;
