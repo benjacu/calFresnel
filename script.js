@@ -78,4 +78,15 @@ function limpiar() {
   if (existingChart) existingChart.destroy();
 }
 
-// Modo claro/oscuro y sliders sincronizados (igual que ya tenías)
+// Modo claro/oscuro
+document.getElementById("toggleTema").addEventListener("change", function () {
+  const body = document.body;
+  const etiqueta = document.getElementById("etiquetaTema");
+  if (this.checked) {
+    body.classList.add("claro");
+    etiqueta.textContent = "Modo oscuro";
+  } else {
+    body.classList.remove("claro");
+    etiqueta.textContent = "Modo claro";
+  }
+});
