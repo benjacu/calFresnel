@@ -207,3 +207,15 @@ body.claro {
   --accent-hover: #005fcc;
   --border: #bbb;
 }
+
+.info-extra {
+  font-size: 0.95em;
+  margin-top: 10px;
+  text-align: center;
+  padding: 10px;
+  background-color: #ffffff10;
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  line-height: 1.4em;
+}
+
