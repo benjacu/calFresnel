@@ -54,6 +54,15 @@
     <div class="formula-container fade-in">
       <img src="formula.png" alt="Fórmula de Fresnel" />
     </div>
+
+    <div class="form-group">
+      <h3>🔍 Simulación de Obstrucción</h3>
+      <label for="obstaculoSlider">Ubicación del obstáculo (entre 0 y 100%):</label>
+      <input type="range" id="obstaculoSlider" min="0" max="100" step="1" value="50" />
+      <div id="infoObstruccion" class="info-extra"></div>
+    </div>
+    <canvas id="graficoObstruccion" width="400" height="250"></canvas>
+
   </div>
 
   <script src="script.js"></script>

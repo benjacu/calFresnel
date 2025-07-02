@@ -128,3 +128,57 @@ document.getElementById("toggleTema").addEventListener("change", function () {
     etiqueta.textContent = "Modo claro";
   }
 });
+
+// Obstrucción visual entre antenas
+const sliderObs = document.getElementById("obstaculoSlider");
+const canvasObs = document.getElementById("graficoObstruccion");
+const ctxObs = canvasObs.getContext("2d");
+const infoObs = document.getElementById("infoObstruccion");
+
+sliderObs.addEventListener("input", () => {
+  dibujarEscena();
+});
+
+function dibujarEscena() {
+  const pos = parseInt(sliderObs.value);
+  const ancho = canvasObs.width;
+  const alto = canvasObs.height;
+
+  ctxObs.clearRect(0, 0, ancho, alto);
+
+  // Antenas
+  ctxObs.fillStyle = "green";
+  ctxObs.fillRect(10, alto / 2 - 40, 10, 80);
+  ctxObs.fillRect(ancho - 20, alto / 2 - 40, 10, 80);
+
+  // Línea Fresnel (curva)
+  ctxObs.strokeStyle = "lime";
+  ctxObs.lineWidth = 2;
+  ctxObs.beginPath();
+  for (let i = 0; i <= 100; i++) {
+    const x = (ancho - 40) * (i / 100) + 20;
+    const y = alto / 2 - 60 * Math.sqrt(1 - Math.pow((2 * i / 100 - 1), 2));
+    if (i === 0) ctxObs.moveTo(x, y);
+    else ctxObs.lineTo(x, y);
+  }
+  ctxObs.stroke();
+
+  // Obstáculo
+  const xObs = (ancho - 40) * (pos / 100) + 20;
+  const yObs = alto / 2 - 60;
+  ctxObs.fillStyle = "red";
+  ctxObs.fillRect(xObs - 10, yObs - 20, 20, 40);
+
+  // Evaluación obstrucción
+  if (pos >= 40 && pos <= 60) {
+    infoObs.textContent = "⚠️ Obstáculo dentro del primer Fresnel: posible interferencia significativa.";
+    infoObs.style.color = "red";
+  } else {
+    infoObs.textContent = "✅ Obstáculo fuera de la zona crítica de Fresnel.";
+    infoObs.style.color = "lime";
+  }
+}
+
+// Dibujo inicial
+dibujarEscena();
+
